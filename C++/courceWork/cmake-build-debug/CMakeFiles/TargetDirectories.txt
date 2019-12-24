@@ -1,0 +1,3 @@
+/home/hal4dan/code/C++/courceWork/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/hal4dan/code/C++/courceWork/cmake-build-debug/CMakeFiles/courceWork.dir
+/home/hal4dan/code/C++/courceWork/cmake-build-debug/CMakeFiles/edit_cache.dir

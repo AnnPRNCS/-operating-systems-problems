@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/hal4dan/code/C++/FIFOout/main.cpp
+iostream
+-
+fcntl.h
+-
+stdio.h
+-
+sys/stat.h
+-
+unistd.h
+-
+cstring
+-
+

@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/hal4dan/code/C++/paricmacher/main.cpp
+cstdio
+/home/hal4dan/code/C++/paricmacher/cstdio
+pthread.h
+-
+fcntl.h
+-
+time.h
+-
+stdlib.h
+-
+

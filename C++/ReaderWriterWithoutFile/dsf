@@ -1,0 +1,84 @@
+pthread_mutex_lock(&mutex); /* получение исключительного доступа к ‘rc’ */
+            rc = rc + 1; /* теперь на одного читателя больше */
+            if (rc == 1) sem_wait(&db); /* если это первый читатель... */
+            pthread_mutex_unlock(&mutex); /* завершение исключительного доступа
+к ‘rc’ */
+            read_data_base(id); /* доступ к данным */
+            pthread_mutex_lock(&mutex); /* получение исключительного доступа к ‘rc’ */
+            rc = rc - 1; /* теперь на одного читателя меньше */
+            if (rc == 0) sem_post(&db); /* если это последний читатель... */
+            pthread_mutex_unlock(&mutex); /* завершение исключительного доступа к ‘rc’
+            #include <iostream>
+            #include <semaphore.h>
+            #include <pthread.h>
+            #include<queue>
+
+            using namespace std;
+            int countrecordWriter = 0;
+            pthread_mutex_t mutex; /* управляет доступом к 'rc' */
+            sem_t db; /* управляет доступом к базе данных */
+            int rc = 0; /* количество читающих или желающих
+            читать процессов */
+            queue<int> buf;
+            struct threads_info {
+                int id;
+            };
+
+            void read_data_base(int id) {
+                int number = buf.front();
+                buf.pop();
+                printf("Читатель №%d прочитал число %d\n", id, number);
+            }
+
+            void write_data_base(int number) {
+                printf("Писатель написал число число %d\n", number);
+                buf.push(number);
+            }
+
+            void *reader(void *argv) {
+                auto *threadsInformation = (struct threads_info *) argv;
+                int id = threadsInformation->id;
+                while (1) { /* бесконечный цикл */
+                    if (countrecordWriter != 0) {
+                       sem_wait(&db); /* если это первый читатель... */
+                        pthread_mutex_lock(&mutex); /* завершение исключительного доступа
+            к ‘rc’ */
+                        read_data_base(id); /* доступ к данным */
+                        countrecordWriter--;
+                        pthread_mutex_unlock(&mutex);
+                        sem_post(&db);
+                        printf("count %d\n", countrecordWriter);
+                    }
+                }
+            }
+
+                void *writer(void *argv) {
+                    int i = 0;
+                    while (1) { /* бесконечный цикл */
+                        sem_wait(&db); /* получение исключительного доступа */
+                        countrecordWriter++;
+                        write_data_base(i); /* обновление данных */
+                        i++;
+                        sem_post(&db); /* завершение исключительного доступа */
+                    }
+                }
+                int main() {
+                    int count_reader = 5;
+                    pthread_t writers;
+                    pthread_t readers[count_reader];
+                    sem_init(&db, 0, 1);
+                    pthread_mutex_init(&mutex, NULL);
+                    pthread_create(&writers, NULL, &writer, nullptr);
+                    threads_info arrayInfoThreads[count_reader];
+                    for (int i = 0; i < count_reader; i++) {
+                        arrayInfoThreads[i].id = i;
+                        pthread_t id;
+                        pthread_create(&id, NULL, &reader, &arrayInfoThreads[i]);
+                        readers[i] = id;
+                    }
+                    pthread_join(writers, nullptr);
+                    for (int i = 0; i < count_reader; i++) {
+                        pthread_join(readers[i], nullptr);
+                    }
+                    return 0;
+                }

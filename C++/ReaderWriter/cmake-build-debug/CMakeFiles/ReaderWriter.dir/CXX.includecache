@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/hal4dan/code/C++/ReaderWriter/writer.cpp
+stdio.h
+-
+fcntl.h
+-
+sys/types.h
+-
+sys/stat.h
+-
+zconf.h
+-
+cstdlib
+-
+

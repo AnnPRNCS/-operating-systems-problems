@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/courceWork.dir/main.cpp.o  -o courceWork 

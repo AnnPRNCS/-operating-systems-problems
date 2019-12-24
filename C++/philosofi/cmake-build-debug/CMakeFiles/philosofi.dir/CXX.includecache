@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/hal4dan/code/C++/philosofi/main.cpp
+cstdio
+-
+unistd.h
+-
+semaphore.h
+-
+pthread.h
+-
+

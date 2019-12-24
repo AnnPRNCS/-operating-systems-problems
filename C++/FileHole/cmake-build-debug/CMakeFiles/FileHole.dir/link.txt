@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/FileHole.dir/main.cpp.o  -o FileHole 

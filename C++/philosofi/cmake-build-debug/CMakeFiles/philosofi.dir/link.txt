@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/philosofi.dir/main.cpp.o  -o philosofi -lpthread 
